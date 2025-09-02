@@ -3,8 +3,8 @@ package com.abhang.matchmate.utils
 object Constants {
 
     object NETWORK{
-        const val BASE_URL = "https://randomuser.me/api/"
-        const val GET_DATA = ""
+        const val BASE_URL = "https://randomuser.me/"
+        const val GET_DATA = "api/"
     }
 
     object DATABASE{

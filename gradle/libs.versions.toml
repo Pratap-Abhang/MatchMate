@@ -1,6 +1,6 @@
 [versions]
 agp = "8.12.1"
-kotlin = "2.0.21"
+kotlin = "2.1.20"
 coreKtx = "1.17.0"
 junit = "4.13.2"
 junitVersion = "1.3.0"
@@ -18,17 +18,17 @@ arch-core = "2.2.0"
 gson = "2.10"
 retrofit-gson = "2.9.0"
 okhttp-logging = "4.2.2"
-hilt = "2.48"
+hilt = "2.52"
 lifecycle-extensions = "2.2.0"
 glide = "4.16.0"
 activity-ktx-vm = "1.8.2"
 fragment-ktx-vm = "1.6.2"
 androidx-test-v = "1.5.0"
 androidx-test-runner = "1.5.2"
-hilt-android-v = "2.44"
 junit-ext-v = "1.1.5"
 nav-testing-v = "2.7.7"
-devtools-ksp-v = "1.9.0-1.0.13"
+devtools-ksp-v = "2.1.20-1.0.32"
+card-stack-view-v = "2.3.4"
 
 
 [libraries]
@@ -73,7 +73,7 @@ lifecycle-livedata = { group = "androidx.lifecycle", name = "lifecycle-livedata-
 lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle" }
 
 #Tests
-hilt-android-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "hilt-android-v" }
+hilt-android-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "hilt" }
 junit-ext= { group = "androidx.test.ext", name = "junit-ktx", version.ref = "junit-ext-v" }
 nav-testing = { group = "androidx.navigation", name = "navigation-testing", version.ref = "nav-testing-v" }
 
@@ -86,7 +86,6 @@ glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "gl
 test-core = { group = "androidx.test", name = "core-ktx", version.ref = "androidx-test-v" }
 test-rules = { group = "androidx.test", name = "rules", version.ref = "androidx-test-v" }
 test-runner = { group = "androidx.test", name = "runner", version.ref = "androidx-test-runner" }
-
 
 
 [plugins]

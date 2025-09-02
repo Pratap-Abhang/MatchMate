@@ -35,6 +35,9 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -55,7 +58,6 @@ dependencies {
     implementation(libs.kotlin.coroutine.android)
     implementation(libs.kotlin.coroutine.core)
     implementation(libs.room.runtime)
-    annotationProcessor(libs.room.compiler)
     ksp(libs.room.compiler)
     implementation(libs.room.ktx)
     testImplementation(libs.room.testing)
@@ -68,7 +70,6 @@ dependencies {
     implementation(libs.lifecycle.livedata)
     implementation(libs.lifecycle.runtime)
     kspAndroidTest(libs.hilt.compiler)
-    androidTestImplementation(libs.hilt.android.testing)
     androidTestImplementation(libs.junit.ext)
     androidTestImplementation(libs.nav.testing)
     testImplementation(libs.core.testing)

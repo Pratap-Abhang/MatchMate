@@ -1,6 +1,7 @@
 package com.abhang.matchmate.data.remote.model.response
 
 import com.abhang.matchmate.data.local.model.UserData
+import com.abhang.matchmate.utils.StatusEnum
 
 data class User(
     val name: Name,
@@ -21,7 +22,8 @@ data class User(
             "${location.city}, ${location.state}, ${location.country}",
             dob.date.split("T").first(),
             phone,
-            picture.large
+            picture.medium,
+            StatusEnum.NEW
         )
     }
 }
@@ -40,12 +42,12 @@ data class Location(
     val city: String,
     val state: String,
     val country: String,
-    val postcode: Int
+    val postcode: String
 )
 
 data class DOB(
     val date: String,
-    val age: Int
+    val age: String
 )
 
 data class Picture(

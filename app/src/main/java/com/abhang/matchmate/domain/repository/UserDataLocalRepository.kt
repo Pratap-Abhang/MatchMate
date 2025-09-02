@@ -1,6 +1,7 @@
 package com.abhang.matchmate.domain.repository
 
 import com.abhang.matchmate.data.local.model.UserData
+import com.abhang.matchmate.utils.StatusEnum
 
 interface UserDataLocalRepository {
 
@@ -10,6 +11,9 @@ interface UserDataLocalRepository {
 
     suspend fun getUserData(limit: Int, offset: Int): List<UserData>
 
-    suspend fun checkIfUserExist(id: List<String>): List<String>
+    suspend fun checkIfUserExist(ids: List<String>): List<String>
 
+    suspend fun updateStatus(id: String, status: String): Int
+
+    suspend fun getUserBaseOnStatus(newstatus: String, limit: Int, offset:Int): List<UserData>
 }

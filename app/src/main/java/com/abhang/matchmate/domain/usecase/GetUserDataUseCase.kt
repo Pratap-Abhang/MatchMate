@@ -1,0 +1,22 @@
+package com.abhang.matchmate.domain.usecase
+
+import com.abhang.matchmate.domain.repository.UserDataRepository
+import com.abhang.matchmate.utils.ResponseState
+import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
+
+class GetUserDataUseCase @Inject constructor(
+    private val repository: UserDataRepository
+) {
+
+    operator fun invoke(results: Int, page: Int) = flow {
+        try{
+            emit(ResponseState.Loading())
+            val userData = repository.getUserData(results, page)
+            emit(ResponseState.Success(userData))
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+}

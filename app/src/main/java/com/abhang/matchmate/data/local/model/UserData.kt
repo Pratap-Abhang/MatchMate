@@ -3,6 +3,7 @@ package com.abhang.matchmate.data.local.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.abhang.matchmate.utils.Constants
+import com.abhang.matchmate.utils.StatusEnum
 
 @Entity(tableName = Constants.DATABASE.DB_TABLE_NAME)
 data class UserData(
@@ -13,7 +14,8 @@ data class UserData(
     val address: String,
     val dob: String,
     val phone: String,
-    val profileLogo: String
+    val profileLogo: String,
+    val status: StatusEnum
 ) {
 
     @PrimaryKey(true)
@@ -42,6 +44,10 @@ data class UserData(
         result = 31 * result + phone.hashCode()
         result = 31 * result + profileLogo.hashCode()
         return result
+    }
+
+    override fun toString(): String {
+        return "Id: $userId, Name:$name, email: $email, gender: $gender, address: $address, dob: $dob, Phone: $phone, profile: $profileLogo \n"
     }
 
 

@@ -1,4 +1,5 @@
 Project Setup Instructions
+
 •	Android Studio: Latest stable version
 •	Minimum SDK: 26 (Android 8.0)
 •	Target SDK: 36

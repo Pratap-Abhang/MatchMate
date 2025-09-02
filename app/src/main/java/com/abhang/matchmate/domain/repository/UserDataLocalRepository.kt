@@ -16,4 +16,6 @@ interface UserDataLocalRepository {
     suspend fun updateStatus(id: String, status: String): Int
 
     suspend fun getUserBaseOnStatus(newstatus: String, limit: Int, offset:Int): List<UserData>
+
+    suspend fun getUserCount(): Int
 }

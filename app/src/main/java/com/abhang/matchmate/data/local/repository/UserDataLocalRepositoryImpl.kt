@@ -36,5 +36,9 @@ class UserDataLocalRepositoryImpl @Inject constructor(
         return userDao.getUserBaseOnStatus(newstatus, limit, offset)
     }
 
+    override suspend fun getUserCount(): Int {
+        return userDao.getUserCount()
+    }
+
 
 }

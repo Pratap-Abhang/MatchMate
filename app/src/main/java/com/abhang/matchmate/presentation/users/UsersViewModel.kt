@@ -26,6 +26,8 @@ class UserViewModel @Inject constructor(
     private var pageSize = 10
     private val _userValue = MutableStateFlow(StateHandler<List<UserData>>())
     var userValue : StateFlow<StateHandler<List<UserData>>> = _userValue
+    private val _userStatusValue = MutableStateFlow(StateHandler<List<UserData>>())
+    var userStatusValue : StateFlow<StateHandler<List<UserData>>> = _userStatusValue
     private val _userUpdateValue = MutableStateFlow(StateHandler<Int>())
     var userUpdateValue : StateFlow<StateHandler<Int>> = _userUpdateValue
 
@@ -52,9 +54,9 @@ class UserViewModel @Inject constructor(
     fun getUserDataBaseOnStatus(status: String, offset:Int) = viewModelScope.launch(Dispatchers.IO) {
         getUserBaseOnStatusUseCase.invoke(status, pageSize, offset).collect{
             when(it){
-                is ResponseState.Loading -> _userValue.value = StateHandler(isLoading = true)
-                is ResponseState.Success -> _userValue.value = StateHandler(isLoading = false, data = it.data)
-                is ResponseState.Error -> _userValue.value = StateHandler(isLoading = false, error = it.message.toString())
+                is ResponseState.Loading -> _userStatusValue.value = StateHandler(isLoading = true)
+                is ResponseState.Success -> _userStatusValue.value = StateHandler(isLoading = false, data = it.data)
+                is ResponseState.Error -> _userStatusValue.value = StateHandler(isLoading = false, error = it.message.toString())
             }
         }
     }

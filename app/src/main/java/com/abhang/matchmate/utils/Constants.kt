@@ -23,7 +23,9 @@ object Constants {
         "13/12/1997",
         "8767418076",
         "",
-        StatusEnum.NEW
+        StatusEnum.NEW,
+        "34",
+        "IN"
     )
 
 }

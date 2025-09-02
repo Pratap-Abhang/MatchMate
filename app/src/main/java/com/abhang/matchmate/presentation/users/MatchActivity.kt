@@ -73,12 +73,12 @@ class MatchActivity : AppCompatActivity() {
         }
         binding.tabLayout.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener{
             override fun onTabSelected(p0: TabLayout.Tab?) {
+                mAdapter.submitList(null)
+                pageNumber = 0
                 when(p0?.id){
-                    1->{
-                        pageNumber = 0
-                        getUsersData(pageNumber)}
-                    2->{ userViewmodel.getUserDataBaseOnStatus("ACCEPTED", pageNumber) }
-                    3->{ userViewmodel.getUserDataBaseOnStatus("DENIED", pageNumber) }
+                    1->{ getUsersData(pageNumber)}
+                    2->{ userViewmodel.getUserDataBaseOnStatus(StatusEnum.ACCEPTED.value, pageNumber) }
+                    3->{ userViewmodel.getUserDataBaseOnStatus(StatusEnum.DENIED.value, pageNumber) }
                 }
             }
             override fun onTabUnselected(p0: TabLayout.Tab?) {}
@@ -135,6 +135,24 @@ class MatchActivity : AppCompatActivity() {
                 }
             }
         }
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                userViewmodel.userStatusValue.collectLatest { data ->
+
+                    binding.progressBar.isVisible = data.isLoading
+                    if(data.isLoading){
+                        binding.progressBar.visibility = View.VISIBLE
+                    } else {
+                        binding.progressBar.visibility = View.GONE
+                        if(!data.data.isNullOrEmpty()){
+                            mList.clear()
+                            mList.addAll(data.data)
+                            mAdapter.submitList(mList)
+                        }
+                    }
+                }
+            }
+        }
     }
 
     private fun setupRecyclerview(){
@@ -164,7 +182,7 @@ class MatchActivity : AppCompatActivity() {
                 val layoutManager = recyclerView.layoutManager as LinearLayoutManager
                 val lastVisible = layoutManager.findLastVisibleItemPosition()
 
-                if (lastVisible >= mAdapter.currentList.size-3) {
+                if (lastVisible >= mAdapter.currentList.size-3 && binding.tabLayout.selectedTabPosition ==0) {
                     pageNumber+=1
                     getUsersData(pageNumber)
                 }

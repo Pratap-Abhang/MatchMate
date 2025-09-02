@@ -18,19 +18,25 @@ class UserDataRepositoryImpl @Inject constructor(
 
     override suspend fun getUserData(results: Int, page: Int, gender: String): List<UserData> {
         return try{
-            if(networkHelper.isNetworkAvailable()){
-                val mResponse = networkApi.getUserData(results, page, gender)
-                val localData = localRepository.checkIfUserExist(mResponse.results.map{ it.toUserData().userId} )
-                if(localData.containsAll(mResponse.results.map { it.login.uuid })) {
-                    localRepository.getUserData(results, page)
-                } else {
-                    val pData = mResponse.results.filter { it.login.uuid !in localData }
-                    localRepository.addUsers(pData.map { it.toUserData() })
+            val cnt = localRepository.getUserCount()
+            if(cnt > results*page){
+                localRepository.getUserData(results, page)
+            }else {
+                if(networkHelper.isNetworkAvailable()){
+                    val mResponse = networkApi.getUserData(results, page, gender)
+                    val localData = localRepository.checkIfUserExist(mResponse.results.map{ it.toUserData().userId} )
+                    if(localData.containsAll(mResponse.results.map { it.login.uuid })) {
+                        localRepository.getUserData(results, page)
+                    } else {
+                        val pData = mResponse.results.filter { it.login.uuid !in localData }
+                        localRepository.addUsers(pData.map { it.toUserData() })
+                        localRepository.getUserData(results, page)
+                    }
+                }else{
                     localRepository.getUserData(results, page)
                 }
-            }else{
-                localRepository.getUserData(results, page)
             }
+
         } catch (e: Exception) {
             e.printStackTrace()
             localRepository.getUserData(results, page)

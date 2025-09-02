@@ -11,7 +11,7 @@ import com.abhang.matchmate.utils.Constants
 @Dao
 interface UserDao {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addUser(userData: UserData)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -31,4 +31,7 @@ interface UserDao {
 
     @Query("SELECT * FROM "+ Constants.DATABASE.DB_TABLE_NAME + " WHERE status = :newstatus ORDER BY userId DESC LIMIT :limit OFFSET :offset")
     suspend fun getUserBaseOnStatus(newstatus: String, limit: Int, offset:Int): List<UserData>
+
+    @Query("SELECT count(*) FROM "+ Constants.DATABASE.DB_TABLE_NAME)
+    suspend fun getUserCount(): Int
 }

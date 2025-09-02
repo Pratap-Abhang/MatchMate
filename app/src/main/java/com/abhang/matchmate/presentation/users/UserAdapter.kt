@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.abhang.matchmate.R
 import com.abhang.matchmate.data.local.model.UserData
 import com.abhang.matchmate.databinding.UserItemCardBinding
 import com.abhang.matchmate.utils.Constants
@@ -25,6 +26,7 @@ class UserAdapter(
                 Glide.with(context)
                     .load(profileLogo)
                     .centerCrop()
+                    .placeholder(R.drawable.placeholder)
                     .into(binding.profileImg)
                 binding.btnAccept.setOnClickListener { onClickListener(userId, true) }
                 binding.btnDeny.setOnClickListener { onClickListener(userId, false) }

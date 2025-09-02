@@ -23,7 +23,7 @@ data class User(
             "${location.city}, ${location.state}, ${location.country}",
             dob.date.split("T").first(),
             phone,
-            picture.medium,
+            picture.large,
             StatusEnum.NEW,
             dob.age,
             nat

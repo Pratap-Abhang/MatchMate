@@ -10,7 +10,8 @@ interface INetworkService {
 
     @GET(Constants.NETWORK.GET_DATA)
     suspend fun getUserData(@Query("results") results: Int,
-                            @Query("page") page: Int) : UserResponse
+                            @Query("page") page: Int,
+                            @Query("gender") gender: String) : UserResponse
 
 
 

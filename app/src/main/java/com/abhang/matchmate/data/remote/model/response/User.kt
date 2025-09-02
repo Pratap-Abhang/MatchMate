@@ -11,7 +11,8 @@ data class User(
     val dob : DOB,
     val phone: String,
     val picture: Picture,
-    val login: LoginData
+    val login: LoginData,
+    val nat: String
 ) {
     fun toUserData(): UserData {
         return UserData(
@@ -23,7 +24,9 @@ data class User(
             dob.date.split("T").first(),
             phone,
             picture.medium,
-            StatusEnum.NEW
+            StatusEnum.NEW,
+            dob.age,
+            nat
         )
     }
 }

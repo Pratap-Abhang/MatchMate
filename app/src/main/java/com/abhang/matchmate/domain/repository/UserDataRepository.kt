@@ -7,7 +7,7 @@ import com.abhang.matchmate.utils.StatusEnum
 
 interface UserDataRepository {
 
-    suspend fun getUserData(results: Int, page : Int): List<UserData>
+    suspend fun getUserData(results: Int, page : Int, gender: String): List<UserData>
 
     suspend fun updateUserStatus(id: String, status: String): Int
 

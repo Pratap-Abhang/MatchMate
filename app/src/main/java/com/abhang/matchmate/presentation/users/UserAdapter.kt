@@ -18,7 +18,7 @@ class UserAdapter(
             val context = binding.root.context
 
             with(userData) {
-                binding.txtName.text = name
+                binding.txtName.text = "$name ($age)"
                 binding.txtEmail.text = email
                 binding.txtMobile.text = phone
                 Glide.with(context)
@@ -27,6 +27,11 @@ class UserAdapter(
                     .into(binding.profileImg)
                 binding.btnAccept.setOnClickListener { onClickListener(userId, true) }
                 binding.btnDeny.setOnClickListener { onClickListener(userId, false) }
+                binding.txtNationality.text = nat
+
+
+
+                binding.txtMatch.text = ""
             }
         }
     }

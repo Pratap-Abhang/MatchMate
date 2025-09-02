@@ -15,7 +15,9 @@ data class UserData(
     val dob: String,
     val phone: String,
     val profileLogo: String,
-    val status: StatusEnum
+    val status: StatusEnum,
+    val age: String,
+    val nat: String
 ) {
 
     @PrimaryKey(true)
@@ -30,7 +32,9 @@ data class UserData(
         address == obj.address &&
         dob == obj.dob &&
         phone == obj.phone &&
-        profileLogo == obj.profileLogo
+        profileLogo == obj.profileLogo &&
+        age == obj.age &&
+        nat == obj.nat
     }
 
     override fun hashCode(): Int {
@@ -43,6 +47,8 @@ data class UserData(
         result = 31 * result + dob.hashCode()
         result = 31 * result + phone.hashCode()
         result = 31 * result + profileLogo.hashCode()
+        result = 31 * result + age.hashCode()
+        result = 31 * result + nat.hashCode()
         return result
     }
 

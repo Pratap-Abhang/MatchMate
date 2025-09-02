@@ -16,10 +16,10 @@ class UserDataRepositoryImpl @Inject constructor(
     private val networkHelper: NetworkHelper
 ) : UserDataRepository {
 
-    override suspend fun getUserData(results: Int, page: Int): List<UserData> {
+    override suspend fun getUserData(results: Int, page: Int, gender: String): List<UserData> {
         return try{
             if(networkHelper.isNetworkAvailable()){
-                val mResponse = networkApi.getUserData(results, page)
+                val mResponse = networkApi.getUserData(results, page, gender)
                 val localData = localRepository.checkIfUserExist(mResponse.results.map{ it.toUserData().userId} )
                 if(localData.containsAll(mResponse.results.map { it.login.uuid })) {
                     localRepository.getUserData(results, page)

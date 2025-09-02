@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.abhang.matchmate.R
 import com.abhang.matchmate.data.local.model.UserData
 import com.abhang.matchmate.databinding.ActivityMatchBinding
+import com.abhang.matchmate.utils.Constants
 import com.abhang.matchmate.utils.StatusEnum
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
@@ -87,7 +88,8 @@ class MatchActivity : AppCompatActivity() {
     }
 
     private fun getUsersData(pageNo: Int){
-        userViewmodel.getUserData(pageNo)
+        val interestedGender = if(Constants.currentuser.gender == "male") "female" else "male"
+        userViewmodel.getUserData(pageNo, interestedGender)
     }
 
     private fun observer(){

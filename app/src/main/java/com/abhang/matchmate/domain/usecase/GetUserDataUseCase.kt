@@ -9,10 +9,10 @@ class GetUserDataUseCase @Inject constructor(
     private val repository: UserDataRepository
 ) {
 
-    operator fun invoke(results: Int, page: Int) = flow {
+    operator fun invoke(results: Int, page: Int, gender: String) = flow {
         try{
             emit(ResponseState.Loading())
-            val userData = repository.getUserData(results, page)
+            val userData = repository.getUserData(results, page, gender)
             emit(ResponseState.Success(userData))
         } catch (e: Exception) {
             e.printStackTrace()

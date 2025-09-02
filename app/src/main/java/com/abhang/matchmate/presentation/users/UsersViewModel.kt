@@ -29,8 +29,8 @@ class UserViewModel @Inject constructor(
     private val _userUpdateValue = MutableStateFlow(StateHandler<Int>())
     var userUpdateValue : StateFlow<StateHandler<Int>> = _userUpdateValue
 
-    fun getUserData(pageNo: Int) = viewModelScope.launch(Dispatchers.IO) {
-        getUserDataUseCase.invoke(pageSize, pageNo).collect{
+    fun getUserData(pageNo: Int, gender: String) = viewModelScope.launch(Dispatchers.IO) {
+        getUserDataUseCase.invoke(pageSize, pageNo, gender).collect{
             when(it){
                 is ResponseState.Loading -> _userValue.value = StateHandler(isLoading = true)
                 is ResponseState.Success -> _userValue.value = StateHandler(isLoading = false, data = it.data)

@@ -8,7 +8,6 @@ import com.abhang.matchmate.domain.usecase.GetUserDataUseCase
 import com.abhang.matchmate.domain.usecase.UpdateUserStatusUseCase
 import com.abhang.matchmate.utils.ResponseState
 import com.abhang.matchmate.utils.StateHandler
-import com.abhang.matchmate.utils.StatusEnum
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow

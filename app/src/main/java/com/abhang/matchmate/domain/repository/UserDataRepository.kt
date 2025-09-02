@@ -1,9 +1,6 @@
 package com.abhang.matchmate.domain.repository
 
 import com.abhang.matchmate.data.local.model.UserData
-import com.abhang.matchmate.data.remote.model.response.User
-import com.abhang.matchmate.data.remote.model.response.UserResponse
-import com.abhang.matchmate.utils.StatusEnum
 
 interface UserDataRepository {
 

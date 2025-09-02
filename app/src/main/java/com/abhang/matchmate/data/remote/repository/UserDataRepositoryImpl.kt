@@ -1,13 +1,10 @@
 package com.abhang.matchmate.data.remote.repository
 
 import com.abhang.matchmate.data.local.model.UserData
-import com.abhang.matchmate.data.remote.model.response.User
-import com.abhang.matchmate.data.remote.model.response.UserResponse
 import com.abhang.matchmate.data.remote.network.INetworkService
 import com.abhang.matchmate.domain.repository.UserDataLocalRepository
 import com.abhang.matchmate.domain.repository.UserDataRepository
 import com.abhang.matchmate.utils.NetworkHelper
-import com.abhang.matchmate.utils.StatusEnum
 import javax.inject.Inject
 
 class UserDataRepositoryImpl @Inject constructor(

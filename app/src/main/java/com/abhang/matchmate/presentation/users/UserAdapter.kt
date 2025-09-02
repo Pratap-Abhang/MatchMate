@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.abhang.matchmate.data.local.model.UserData
 import com.abhang.matchmate.databinding.UserItemCardBinding
 import com.abhang.matchmate.utils.Constants
-import com.abhang.matchmate.utils.DiffUtilCallBack
 import com.abhang.matchmate.utils.MatchAlgorithm
 import com.bumptech.glide.Glide
 

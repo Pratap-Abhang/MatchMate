@@ -1,6 +1,5 @@
 package com.abhang.matchmate.data.remote.network
 
-import com.abhang.matchmate.data.remote.model.response.User
 import com.abhang.matchmate.data.remote.model.response.UserResponse
 import com.abhang.matchmate.utils.Constants
 import retrofit2.http.GET

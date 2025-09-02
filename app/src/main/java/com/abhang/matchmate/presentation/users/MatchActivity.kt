@@ -15,15 +15,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.abhang.matchmate.R
 import com.abhang.matchmate.data.local.model.UserData
 import com.abhang.matchmate.databinding.ActivityMatchBinding
 import com.abhang.matchmate.utils.Constants
 import com.abhang.matchmate.utils.StatusEnum
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -57,7 +54,7 @@ class MatchActivity : AppCompatActivity() {
     }
 
     private fun setupTabLayout() {
-        (binding.tabLayout as TabLayout).apply {
+        binding.tabLayout.apply {
             addTab(binding.tabLayout.newTab().apply {
                 id = 1
                 text = "All"

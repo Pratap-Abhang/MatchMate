@@ -2,7 +2,6 @@ package com.abhang.matchmate.domain.usecase
 
 import com.abhang.matchmate.domain.repository.UserDataRepository
 import com.abhang.matchmate.utils.ResponseState
-import com.abhang.matchmate.utils.StatusEnum
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 

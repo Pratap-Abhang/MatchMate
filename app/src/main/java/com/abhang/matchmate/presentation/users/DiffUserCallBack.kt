@@ -5,11 +5,11 @@ import com.abhang.matchmate.data.local.model.UserData
 
 class DiffUserCallBack: DiffUtil.ItemCallback<UserData>() {
     override fun areItemsTheSame(oldItem: UserData, newItem: UserData): Boolean {
-        return oldItem==newItem
+        return oldItem == newItem
     }
 
     override fun areContentsTheSame(oldItem: UserData, newItem: UserData): Boolean {
-        return oldItem.userId == newItem.userId
+        return oldItem.equals(newItem)
     }
 
 }

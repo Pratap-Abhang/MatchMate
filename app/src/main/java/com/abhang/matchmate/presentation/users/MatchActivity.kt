@@ -21,8 +21,10 @@ import com.abhang.matchmate.utils.Constants
 import com.abhang.matchmate.utils.StatusEnum
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class MatchActivity : AppCompatActivity() {
@@ -32,6 +34,7 @@ class MatchActivity : AppCompatActivity() {
     private var pageNumber: Int = 0
     private var mList : ArrayList<UserData> = ArrayList()
     private val userViewmodel : UserViewModel by viewModels()
+    private var shouldApiCall: Boolean = true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -59,14 +62,14 @@ class MatchActivity : AppCompatActivity() {
                 id = 1
                 text = "All"
             })
-            addTab(binding.tabLayout.newTab().apply {
-                id = 2
-                text = "Approved"
-            })
-            addTab(binding.tabLayout.newTab().apply {
-                id = 3
-                text = "Denied"
-            })
+//            addTab(binding.tabLayout.newTab().apply {
+//                id = 2
+//                text = "Approved"
+//            })
+//            addTab(binding.tabLayout.newTab().apply {
+//                id = 3
+//                text = "Denied"
+//            })
         }
         binding.tabLayout.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener{
             override fun onTabSelected(p0: TabLayout.Tab?) {
@@ -74,8 +77,8 @@ class MatchActivity : AppCompatActivity() {
                 pageNumber = 0
                 when(p0?.id){
                     1->{ getUsersData(pageNumber)}
-                    2->{ userViewmodel.getUserDataBaseOnStatus(StatusEnum.ACCEPTED.value, pageNumber) }
-                    3->{ userViewmodel.getUserDataBaseOnStatus(StatusEnum.DENIED.value, pageNumber) }
+//                    2->{ userViewmodel.getUserDataBaseOnStatus(StatusEnum.ACCEPTED.value, pageNumber) }
+//                    3->{ userViewmodel.getUserDataBaseOnStatus(StatusEnum.DENIED.value, pageNumber) }
                 }
             }
             override fun onTabUnselected(p0: TabLayout.Tab?) {}
@@ -85,8 +88,11 @@ class MatchActivity : AppCompatActivity() {
     }
 
     private fun getUsersData(pageNo: Int){
-        val interestedGender = if(Constants.currentuser.gender == "male") "female" else "male"
-        userViewmodel.getUserData(pageNo, interestedGender)
+
+            val interestedGender = if(Constants.currentuser.gender == "male") "female" else "male"
+            userViewmodel.getUserData(pageNo, interestedGender)
+            shouldApiCall = false
+
     }
 
     private fun observer(){
@@ -99,14 +105,17 @@ class MatchActivity : AppCompatActivity() {
                         binding.progressBar.visibility = View.VISIBLE
                     } else {
                         binding.progressBar.visibility = View.GONE
-                        if(data.data?.isNotEmpty() == true){
-                            mList.addAll(data.data)
+                        mList.addAll(data.data?:emptyList())
+                        if(mList.isNotEmpty()){
                             Log.e("COLLECTED_DATA: ", data.data.toString())
                             binding.noData.visibility = View.GONE
                             binding.recyclerView.visibility = View.VISIBLE
 
-                            if(::mAdapter.isInitialized){
-                                mAdapter.submitList(mList)
+                            withContext(Dispatchers.Main){
+                                if(::mAdapter.isInitialized){
+                                    mAdapter.submitList(mList.toList())
+                                    shouldApiCall = true
+                                }
                             }
                         }else{
                             binding.noData.visibility = View.VISIBLE
@@ -142,9 +151,7 @@ class MatchActivity : AppCompatActivity() {
                     } else {
                         binding.progressBar.visibility = View.GONE
                         if(!data.data.isNullOrEmpty()){
-                            mList.clear()
-                            mList.addAll(data.data)
-                            mAdapter.submitList(mList)
+                            mAdapter.submitList(data.data.toList())
                         }
                     }
                 }
@@ -179,9 +186,11 @@ class MatchActivity : AppCompatActivity() {
                 val layoutManager = recyclerView.layoutManager as LinearLayoutManager
                 val lastVisible = layoutManager.findLastVisibleItemPosition()
 
-                if (lastVisible >= mAdapter.currentList.size-3 && binding.tabLayout.selectedTabPosition ==0) {
-                    pageNumber+=1
-                    getUsersData(pageNumber)
+                if (lastVisible >= mList.size-3 && binding.tabLayout.selectedTabPosition ==0) {
+                    if(shouldApiCall){
+                        pageNumber+=1
+                        getUsersData(pageNumber)
+                    }
                 }
             }
         })

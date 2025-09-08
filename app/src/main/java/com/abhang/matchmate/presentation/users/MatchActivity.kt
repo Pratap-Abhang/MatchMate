@@ -99,27 +99,24 @@ class MatchActivity : AppCompatActivity() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED){
                 userViewmodel.userValue.collectLatest { data ->
-
                     binding.progressBar.isVisible = data.isLoading
-                    if(data.isLoading){
-                        binding.progressBar.visibility = View.VISIBLE
-                    } else {
-                        binding.progressBar.visibility = View.GONE
-                        mList.addAll(data.data?:emptyList())
-                        if(mList.isNotEmpty()){
+                    when{
+                        data.data!=null -> {
+                            mList.addAll(data.data)
                             Log.e("COLLECTED_DATA: ", data.data.toString())
-                            binding.noData.visibility = View.GONE
-                            binding.recyclerView.visibility = View.VISIBLE
-
                             withContext(Dispatchers.Main){
                                 if(::mAdapter.isInitialized){
                                     mAdapter.submitList(mList.toList())
                                     shouldApiCall = true
                                 }
                             }
-                        }else{
-                            binding.noData.visibility = View.VISIBLE
-                            binding.recyclerView.visibility = View.GONE
+                            binding.noData.isVisible = mList.isEmpty()
+                            binding.recyclerView.isVisible = !mList.isEmpty()
+                        }
+                        data.error.isNotEmpty() -> {
+                            binding.noData.isVisible = mList.isEmpty()
+                            binding.recyclerView.isVisible = !mList.isEmpty()
+                            Toast.makeText(this@MatchActivity, data.error, Toast.LENGTH_SHORT).show()
                         }
                     }
                 }

@@ -40,10 +40,9 @@ object UserModule {
     @Singleton
     fun provideUserRepository(
         api: INetworkService,
-        localRepository: UserDataLocalRepository,
-        networkHelper: NetworkHelper
+        localRepository: UserDataLocalRepository
     ): UserDataRepository {
-        return UserDataRepositoryImpl(api, localRepository, networkHelper)
+        return UserDataRepositoryImpl(api, localRepository)
     }
 
 

@@ -6,7 +6,7 @@ import com.abhang.matchmate.data.local.model.UserData
 import com.abhang.matchmate.domain.usecase.GetUserBaseOnStatusUseCase
 import com.abhang.matchmate.domain.usecase.GetUserDataUseCase
 import com.abhang.matchmate.domain.usecase.UpdateUserStatusUseCase
-import com.abhang.matchmate.utils.ResponseState
+import com.abhang.matchmate.data.handler.ResponseState
 import com.abhang.matchmate.utils.StateHandler
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -41,23 +41,23 @@ class UserViewModel @Inject constructor(
     }
 
     fun updateUserStatus(id: String, status: String) = viewModelScope.launch(Dispatchers.IO) {
-        updateUserStatusUseCase.invoke(id, status).collect{
-            when(it){
-                is ResponseState.Loading -> _userUpdateValue.value = StateHandler(isLoading = true)
-                is ResponseState.Success -> _userUpdateValue.value = StateHandler(isLoading = false, data = it.data)
-                is ResponseState.Error -> _userUpdateValue.value = StateHandler(isLoading = false, error = it.message.toString())
-            }
-        }
+//        updateUserStatusUseCase.invoke(id, status).collect{
+//            when(it){
+//                is ResponseState.Loading -> _userUpdateValue.value = StateHandler(isLoading = true)
+//                is ResponseState.Success -> _userUpdateValue.value = StateHandler(isLoading = false, data = it.data)
+//                is ResponseState.Error -> _userUpdateValue.value = StateHandler(isLoading = false, error = it.message.toString())
+//            }
+//        }
     }
 
     fun getUserDataBaseOnStatus(status: String, offset:Int) = viewModelScope.launch(Dispatchers.IO) {
-        getUserBaseOnStatusUseCase.invoke(status, pageSize, offset).collect{
-            when(it){
-                is ResponseState.Loading -> _userStatusValue.value = StateHandler(isLoading = true)
-                is ResponseState.Success -> _userStatusValue.value = StateHandler(isLoading = false, data = it.data)
-                is ResponseState.Error -> _userStatusValue.value = StateHandler(isLoading = false, error = it.message.toString())
-            }
-        }
+//        getUserBaseOnStatusUseCase.invoke(status, pageSize, offset).collect{
+//            when(it){
+//                is ResponseState.Loading -> _userStatusValue.value = StateHandler(isLoading = true)
+//                is ResponseState.Success -> _userStatusValue.value = StateHandler(isLoading = false, data = it.data)
+//                is ResponseState.Error -> _userStatusValue.value = StateHandler(isLoading = false, error = it.message.toString())
+//            }
+//        }
     }
 
 }

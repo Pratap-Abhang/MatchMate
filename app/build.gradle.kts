@@ -76,7 +76,6 @@ dependencies {
     ksp(libs.hilt.compiler)
     implementation(libs.activity.ktx)
     implementation(libs.fragment.ktx)
-    implementation(libs.lifecycle.extension)
     implementation(libs.lifecycler.vm)
     implementation(libs.lifecycle.livedata)
     implementation(libs.lifecycle.runtime)

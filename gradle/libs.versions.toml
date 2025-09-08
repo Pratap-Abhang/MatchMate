@@ -19,7 +19,6 @@ gson = "2.10"
 retrofit-gson = "2.9.0"
 okhttp-logging = "4.2.2"
 hilt = "2.52"
-lifecycle-extensions = "2.2.0"
 glide = "4.16.0"
 activity-ktx-vm = "1.8.2"
 fragment-ktx-vm = "1.6.2"
@@ -30,7 +29,6 @@ nav-testing-v = "2.7.7"
 devtools-ksp-v = "2.1.20-1.0.32"
 card-stack-view-v = "2.3.4"
 junitJupiter = "5.8.2"
-junitJunit = "4.12"
 
 #testing
 turbine = "1.1.0"
@@ -43,6 +41,7 @@ kotlinReflect = "1.9.21"
 kotlinxCoroutinesTest = "1.10.2"
 mockk-v = "1.14.5"
 mockkAndroid = "1.14.5"
+robolectric-v = "4.10.3"
 
 
 [libraries]
@@ -81,7 +80,6 @@ hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", v
 #Viewmodel & lifecycle
 activity-ktx = { group = "androidx.activity", name = "activity-ktx", version.ref = "activity-ktx-vm" }
 fragment-ktx= { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragment-ktx-vm" }
-lifecycle-extension = { group = "androidx.lifecycle", name = "lifecycle-extensions", version.ref = "lifecycle-extensions" }
 lifecycler-vm = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 lifecycle-livedata = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycle" }
 lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle" }
@@ -100,13 +98,12 @@ glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "gl
 test-core = { group = "androidx.test", name = "core-ktx", version.ref = "androidx-test-v" }
 test-rules = { group = "androidx.test", name = "rules", version.ref = "androidx-test-v" }
 test-runner = { group = "androidx.test", name = "runner", version.ref = "androidx-test-runner" }
-junit-junit = { group = "junit", name = "junit", version.ref = "junitJunit" }
+junit-junit = { group = "junit", name = "junit", version.ref = "junit" }
 
 #Testing
 junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junitJupiter" }
 junit-jupiter-api = { group = "org.junit.jupiter", name = "junit-jupiter-api", version.ref = "junitJupiter" }
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
-androidx-vi-test-junit4-android = { group = "androidx.compose.ui", name = "ui-test-junit4-android", version.ref = "viTestJunit4Android" }
 ndroidx-compose-vi-tooling = { group = "androidx.compose.ui", name = "vi-tooling"}
 kotest-assertions-core = { module = "io.kotest:kotest-assertions-core", version.ref = "kotestAssertionsCore" }
 kotest-runner-junit5 = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotestRunnerJunit5" }
@@ -114,14 +111,14 @@ kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref =
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
 mockk = { module = "io.mockk:mockk", version.ref = "mockk-v" }
 mockk-android = { module = "io.mockk:mockk-android", version.ref = "mockkAndroid" }
+robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric-v" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "devtools-ksp-v" }
-screenshot = { id = "com.android.compose.screenshot", version.ref = "screenshot"}
 android-junit = { id = "de.mannodermaus.android-junit5", version.ref ="androidJunit5" }
 
 [bundles]
-unittest = ["junit-jupiter", "junit-jupiter-api", "kotest-assertions-core", "mockk", "kotlinx-coroutines-test", "kotest-runner-junit5"]
+unittest = ["junit-jupiter", "robolectric", "junit-jupiter-api", "kotest-assertions-core", "mockk", "kotlinx-coroutines-test", "kotest-runner-junit5"]
